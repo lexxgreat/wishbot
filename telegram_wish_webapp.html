@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WishApp</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0f8ff;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #0066cc;
+    }
+    .card {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar-fill {
+      background: #4caf50;
+      height: 10px;
+      width: 60%;
+    }
+    .button {
+      background: #007BFF;
+      color: white;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ваши желания</h1>
+
+  <div class="card">
+    <h3>Научиться играть на гитаре</h3>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: 40%;"></div></div>
+    <p>Срок: до 1 августа</p>
+    <button class="button">Посмотреть шаги</button>
+  </div>
+
+  <div class="card">
+    <h3>Выучить английский</h3>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: 70%;"></div></div>
+    <p>Срок: до 15 июня</p>
+    <button class="button">Посмотреть шаги</button>
+  </div>
+</body>
+</html>
