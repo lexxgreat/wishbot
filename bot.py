@@ -12,7 +12,7 @@ users_goals = {}
 logging.basicConfig(level=logging.INFO)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Привет! Я бот для исполнения твоих желаний. Используй /новоежелание чтобы начать!")
+    await update.message.reply_text("Привет! Я бот для исполнения твоих желаний. Используй /newgoal чтобы начать!")
 
 async def new_goal(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Введите ваше желание:")
@@ -26,7 +26,7 @@ async def save_goal(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "steps": [],
         "done": []
     }
-    await update.message.reply_text(f"Желание сохранено: {goal_text}. Добавь шаги с помощью /добавитьшаг")
+    await update.message.reply_text(f"Желание сохранено: {goal_text}. Добавь шаги с помощью /addstep")
     return ConversationHandler.END
 
 async def add_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -40,18 +40,18 @@ async def save_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         users_goals[user_id]["steps"].append(step_text)
         await update.message.reply_text(f"Шаг добавлен: {step_text}")
     else:
-        await update.message.reply_text("Сначала добавьте желание с помощью /новоежелание")
+        await update.message.reply_text("Сначала добавьте желание с помощью /newgoal")
     return ConversationHandler.END
 
 async def progress(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     data = users_goals.get(user_id)
     if not data:
-        await update.message.reply_text("У вас пока нет желаний. Добавьте с /новоежелание")
+        await update.message.reply_text("У вас пока нет желаний. Добавьте с /newgoal")
         return
     total = len(data["steps"])
     done = len(data["done"])
-    await update.message.reply_text(f"Прогресс: {done}/{total} шагов выполнено.")
+    await update.message.reply_text(f"progress: {done}/{total} шагов выполнено.")
 
 async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
@@ -71,13 +71,13 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
 conv_goal = ConversationHandler(
-    entry_points=[CommandHandler("новоежелание", new_goal)],
+    entry_points=[CommandHandler("newgoal", new_goal)],
     states={1: [MessageHandler(filters.TEXT & ~filters.COMMAND, save_goal)]},
     fallbacks=[]
 )
 
 conv_step = ConversationHandler(
-    entry_points=[CommandHandler("добавитьшаг", add_step)],
+    entry_points=[CommandHandler("addstep", add_step)],
     states={2: [MessageHandler(filters.TEXT & ~filters.COMMAND, save_step)]},
     fallbacks=[]
 )
@@ -85,7 +85,7 @@ conv_step = ConversationHandler(
 app.add_handler(CommandHandler("start", start))
 app.add_handler(conv_goal)
 app.add_handler(conv_step)
-app.add_handler(CommandHandler("прогресс", progress))
+app.add_handler(CommandHandler("progress", progress))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
 
 app.run_polling()
