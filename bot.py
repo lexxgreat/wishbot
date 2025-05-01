@@ -89,3 +89,14 @@ app.add_handler(CommandHandler("progress", progress))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
 
 app.run_polling()
+
+
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
+async def open_app(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [[
+        InlineKeyboardButton("Открыть приложение", web_app={"url": "https://wishapp-djjk.onrender.com/"})
+    ]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text("Нажмите кнопку ниже, чтобы открыть визуальное приложение:", reply_markup=reply_markup)
+
