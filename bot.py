@@ -3,8 +3,8 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
 import openai
 
-TELEGRAM_TOKEN = "ТВОЙ_ТОКЕН_ОТ_BOTFATHER"
-OPENAI_API_KEY = "ТВОЙ_OPENAI_API_KEY"
+TELEGRAM_TOKEN = "7638202633:AAFak_cCPHklvknTq1gmMDZ9A3LmQmRwBwM"
+OPENAI_API_KEY = "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"
 openai.api_key = OPENAI_API_KEY
 
 users_goals = {}
