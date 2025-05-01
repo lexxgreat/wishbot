@@ -87,6 +87,7 @@ app.add_handler(conv_goal)
 app.add_handler(conv_step)
 app.add_handler(CommandHandler("progress", progress))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
+dispatcher.add_handler(CommandHandler("app", open_app))
 
 app.run_polling()
 
